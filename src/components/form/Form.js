@@ -1,5 +1,33 @@
 import React, { PureComponent } from "react";
+import Button from "@material-ui/core/Button";
 import "./Form.css";
+
+import { withStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "baseline",
+    justifyContent: "space-evenly"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  }
+});
 
 class Form extends PureComponent {
   constructor(props) {
@@ -8,6 +36,7 @@ class Form extends PureComponent {
       sampleIds: "",
       category: ""
     };
+    this.initialState = this.state;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,36 +58,44 @@ class Form extends PureComponent {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div id="input">
-          <label>
-            Sample Ids:
-            <input
-              type="text"
-              name="sampleIds"
-              value={this.state.sampleIds.value}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Category:
-            <select
-              value={this.state.category.value}
-              onChange={this.handleChange}
-              name="category"
-            >
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option value="coconut">Coconut</option>
-              <option value="mango">Mango</option>
-            </select>
-          </label>
-        </div>
-        <input type="submit" value="Submit" />
+      <form
+        className={classes.container}
+        noValidate
+        autoComplete="off"
+        onSubmit={this.handleSubmit}
+      >
+        <TextField
+          id="sampleIds"
+          name="sampleIds"
+          label="Sample Ids"
+          className={classes.textField}
+          value={this.state.sampleIds}
+          onChange={this.handleChange}
+          margin="normal"
+        />
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="category">Category</InputLabel>
+          <Select
+            value={this.state.category}
+            onChange={this.handleChange}
+            name="category"
+            inputProps={{
+              id: "category"
+            }}
+          >
+            <MenuItem value="virus">Virus</MenuItem>
+            <MenuItem value="bacteria">Bacteria</MenuItem>
+          </Select>
+        </FormControl>
+        <Button variant="contained" type="submit" color="primary">
+          Search
+        </Button>
       </form>
     );
   }
 }
 
-export default Form;
+export default withStyles(styles)(Form);

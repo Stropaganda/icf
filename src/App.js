@@ -2,22 +2,26 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Form from "./components/form/Form";
+import RecordList from "./components/record-list/RecordList";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recordList: []
+      recordListTitles: ["Facility", "Sample Type"],
+      recordList: [{}, {}, {}, {}, {}]
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(formData) {
-    console.log(formData);
     let mockResp = [
       { facility: "Atlanta", sampleType: "virus" },
-      { facility: "Seattle", sampleType: "bacteria" }
+      { facility: "Seattle", sampleType: "bacteria" },
+      {},
+      {},
+      {}
     ];
     fetch("https://mywebsite.com/endpoint/", {
       method: "POST",
@@ -46,6 +50,10 @@ class App extends Component {
     return (
       <div className="App">
         <Form onSubmit={this.handleSubmit} />
+        <RecordList
+          recordListTitles={this.state.recordListTitles}
+          recordList={this.state.recordList}
+        />
       </div>
     );
   }

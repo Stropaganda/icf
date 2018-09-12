@@ -1,0 +1,11 @@
+tr:nth-child(2n) {
+  background-color: lightgrey;
+  color: white;
+}
+th {
+  background-color: lightgrey;
+  color: white;
+}
+table {
+  margin-top: 20px;
+}
