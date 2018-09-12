@@ -1,0 +1,10 @@
+form {
+  border: 1px solid gray;
+  padding: 20px;
+}
+form #input {
+  padding-bottom: 20px;
+}
+form label {
+  padding-right: 50px;
+}
