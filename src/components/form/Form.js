@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
 import Button from "@material-ui/core/Button";
 import "./Form.css";
+import PropTypes from 'prop-types';
 
 import { withStyles } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
@@ -97,5 +96,10 @@ class Form extends PureComponent {
     );
   }
 }
+
+Form.propTypes = {
+  onSubmit: PropTypes.func,
+  classes: PropTypes.any
+};
 
 export default withStyles(styles)(Form);
